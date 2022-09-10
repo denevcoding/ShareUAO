@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class movimientoanimacion : MonoBehaviour
 {
-    private Animator gatoimoportado;
-    private void Awake()
-    {
-        gatoimportado = GetComponent<Animator>();
-    }
+  //  private Animator gatoimoportado;
+    //private void Awake()
+   // {
+      //  gatoimportado = GetComponent<Animator>();
+    //}
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +18,13 @@ public class movimientoanimacion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Imput.GetkeyDown (KeyCode.W))
+       //if(Imput.GetkeyDown (KeyCode.W))
         {
-            gatoimportado.SetBool("moving", true);
+         //   gatoimportado.SetBool("moving", true);
         }
-       if(Input.GetKeyUp(KeyCode.W))
+       //if(Input.GetKeyUp(KeyCode.W))
         {
-            gatoimportado.SetBool("moving", false);
+         //   gatoimportado.SetBool("moving", false);
         }
     }
 }
