@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: fb7bd064001294d78965c30a87560bbf
+guid: 9e5083882adb74d38b9aaa8e14326ae4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Idle
+    second: RunningGeo
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,18 +36,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: RunningGeo
       takeName: Take 001
       internalID: 0
       firstFrame: 1
-      lastFrame: 120
+      lastFrame: 12
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -63,7 +63,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -123,9 +123,9 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0ff214236549c4a0fac361651db8ad61,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: eb3f98c3a37324bfe8dd1f04243bb492,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
