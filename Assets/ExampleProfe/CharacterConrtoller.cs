@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterConrtoller : MonoBehaviour
 {
     private Rigidbody rbCharacter;
+    public Animator catAnimator;
 
     [Header("Platformer properties")]
     public bool sideScroller; // the game is 2.5D?
@@ -79,6 +80,9 @@ public class CharacterConrtoller : MonoBehaviour
     void Update()
     {
         grounded = IsGrounded(); //Set the animator from here or inside the function
+        catAnimator.SetBool("isGrounded", grounded);
+        Debug.Log(grounded);
+
         CalculateInputs(); //Update and listen inputs and calculate vector based on sidescroller bool
        
     }
@@ -121,6 +125,8 @@ public class CharacterConrtoller : MonoBehaviour
                     {
                         movingObjSpeed = Vector3.zero;
                     }
+
+                  
                     Debug.Log("Am touching the floor");
                     //yes our feet are on something    
                     return true;
@@ -211,6 +217,15 @@ public class CharacterConrtoller : MonoBehaviour
 
         inputDirection = moveDirection - transform.position;
         Debug.DrawRay(transform.position, inputDirection, Color.red);
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            catAnimator.SetBool("Running", true);
+        }
+        else
+        {
+            catAnimator.SetBool("Running", false);
+        }
 
     }
 
