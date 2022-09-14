@@ -21,7 +21,15 @@ public class CharacterConrtoller : MonoBehaviour
     //Ground
     [Tooltip("Esta variable controla la aceleracion en el suelo")]
     public float accel;
+    public float runningAccel;
     public float decel;
+
+
+    public bool running;
+
+    public float jumpForce;
+
+
     [Space(20)]
     //Air
     public float airAccel;  
@@ -67,13 +75,7 @@ public class CharacterConrtoller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (true)
-        {
-
-        }
-
-        int result = suma(2, 3);
-        Debug.Log("Resultado suma " + suma(2, 3));
+      
     }
 
     // Update is called once per frame
@@ -84,7 +86,15 @@ public class CharacterConrtoller : MonoBehaviour
         Debug.Log(grounded);
 
         CalculateInputs(); //Update and listen inputs and calculate vector based on sidescroller bool
-       
+
+        catAnimator.SetFloat("DistanceToTarget", m_DistanceToTarget);
+
+        if (rbCharacter.velocity.y <= -0.01)
+        {
+            catAnimator.SetBool("Jumping", false);
+        }
+
+        catAnimator.SetFloat("YVelocity", rbCharacter.velocity.y);
     }
 
 
@@ -126,9 +136,12 @@ public class CharacterConrtoller : MonoBehaviour
                         movingObjSpeed = Vector3.zero;
                     }
 
-                  
+
+                    catAnimator.SetBool("Jumping", false);
+
                     Debug.Log("Am touching the floor");
                     //yes our feet are on something    
+                
                     return true;
 
                 }
@@ -144,22 +157,22 @@ public class CharacterConrtoller : MonoBehaviour
     private void FixedUpdate()
     {
         MoveTo(moveDirection, curAccel, 0.05f, true);
-        //RotateVelocity(rotateSpeed, true);
 
-        if (rotateSpeed != 0 && direction.magnitude != 0)
+
+        if (rotateSpeed != 0 && direction.magnitude != 0) {
             RotateToDirection(inputDirection, curRotateSpeed, true);
+            //RotateVelocity(rotateSpeed, true);
+        }
+
 
 
         ManageSpeed(curDecel, maxSpeed + movingObjSpeed.magnitude, true);
+
+
     }
 
 
-    public int suma(int num1, int num2)
-    {
-        int resultado = num1 + num2;
 
-        return resultado;
-    }
 
     private void InitFloorChecks()
     {
@@ -201,8 +214,8 @@ public class CharacterConrtoller : MonoBehaviour
         screenMovementForward = screenMovementSpace * Vector3.forward;
         screenMovementRight = screenMovementSpace * Vector3.right;
 
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
 
 
         //only apply vertical input to movemement, if player is not sidescroller
@@ -211,21 +224,39 @@ public class CharacterConrtoller : MonoBehaviour
         else
             direction = Vector3.right * h;
 
+        direction.Normalize();
+
         moveDirection = transform.position + direction;
 
         Debug.DrawRay(transform.position, moveDirection, Color.green);
 
+
         inputDirection = moveDirection - transform.position;
         Debug.DrawRay(transform.position, inputDirection, Color.red);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
+            running = true;
             catAnimator.SetBool("Running", true);
         }
         else
         {
+            running = false;
             catAnimator.SetBool("Running", false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (grounded)
+            {
+                catAnimator.SetBool("Jumping", true);
+                rbCharacter.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+          
+        }
+
+
+
 
     }
 
@@ -237,13 +268,32 @@ public class CharacterConrtoller : MonoBehaviour
             relativePos.y = 0;
 
         m_DistanceToTarget = relativePos.magnitude;
-        if (m_DistanceToTarget <= stopDistance)
+        if (m_DistanceToTarget <= stopDistance) {
+            catAnimator.SetFloat("Locomotion", 0);
             return true; //Deje d moverme y llegue al destino del input
+        }
+            
 
-        else
-           rbCharacter.AddForce(relativePos * acceleration * Time.deltaTime, ForceMode.VelocityChange);
+        else {
+            if (running)
+            {
+                rbCharacter.AddForce(relativePos * runningAccel * Time.deltaTime, ForceMode.VelocityChange);
+                catAnimator.SetFloat("Locomotion", 2);
+            }
+            else
+            {
+
+                rbCharacter.AddForce(relativePos * acceleration * Time.deltaTime, ForceMode.VelocityChange);
+                catAnimator.SetFloat("Locomotion", 1);
+            }
+        }
+          
+
+
 
         return false; // Keep moving, input or IA are applying movement
+
+       
 
     }
 
@@ -255,9 +305,18 @@ public class CharacterConrtoller : MonoBehaviour
             m_currentSpeed.y = 0;
 
         if (m_currentSpeed.magnitude > 0)
-        {           
-            if (rbCharacter.velocity.magnitude > maxSpeed)
-                rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+        {
+            if (running)
+            {
+                if (rbCharacter.velocity.magnitude > 10)
+                    rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+            }
+            else
+            {
+                if (rbCharacter.velocity.magnitude > maxSpeed)
+                    rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+            }
+           
         }
 
     }
