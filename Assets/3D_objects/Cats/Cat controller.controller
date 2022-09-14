@@ -45,18 +45,15 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: DistanceToTarget
     m_EventTreshold: 0.05
-  - m_ConditionMode: 2
-    m_ConditionEvent: Jumping
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4484384908805165935}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.13279808
+  m_TransitionDuration: 0.2023912
   m_TransitionOffset: 0
-  m_ExitTime: 0.8723403
+  m_ExitTime: 0.8723402
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -79,9 +76,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.12009287
+  m_TransitionDuration: 0.05478227
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.7500001
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -103,9 +100,6 @@ AnimatorStateTransition:
     m_EventTreshold: 0.05
   - m_ConditionMode: 2
     m_ConditionEvent: Running
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Jumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5161369167833615356}
@@ -193,9 +187,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: DistanceToTarget
     m_EventTreshold: 0.05
-  - m_ConditionMode: 2
-    m_ConditionEvent: Jumping
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4484384908805165935}
   m_Solo: 0
@@ -272,16 +263,13 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: DistanceToTarget
     m_EventTreshold: 0.05
-  - m_ConditionMode: 2
-    m_ConditionEvent: Jumping
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5161369167833615356}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.15578169
+  m_TransitionDuration: 0.10374743
   m_TransitionOffset: 0
   m_ExitTime: 0.731505
   m_HasExitTime: 0
@@ -357,6 +345,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: YVelocity
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: XVelocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -450,18 +444,15 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: DistanceToTarget
     m_EventTreshold: 0.05
-  - m_ConditionMode: 2
-    m_ConditionEvent: Jumping
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9075190353851103732}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.14336205
   m_TransitionOffset: 0
-  m_ExitTime: 0.87234044
+  m_ExitTime: 0.8723405
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -582,18 +573,15 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: DistanceToTarget
     m_EventTreshold: 0.05
-  - m_ConditionMode: 2
-    m_ConditionEvent: Jumping
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9075190353851103732}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.12366164
+  m_TransitionDuration: 0.18675944
   m_TransitionOffset: 0
-  m_ExitTime: 0.4545454
+  m_ExitTime: 0.65045744
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

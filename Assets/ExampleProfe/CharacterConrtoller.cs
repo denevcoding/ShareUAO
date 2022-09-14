@@ -87,14 +87,7 @@ public class CharacterConrtoller : MonoBehaviour
 
         CalculateInputs(); //Update and listen inputs and calculate vector based on sidescroller bool
 
-        catAnimator.SetFloat("DistanceToTarget", m_DistanceToTarget);
-
-        if (rbCharacter.velocity.y <= -0.01)
-        {
-            catAnimator.SetBool("Jumping", false);
-        }
-
-        catAnimator.SetFloat("YVelocity", rbCharacter.velocity.y);
+       
     }
 
 
@@ -103,13 +96,12 @@ public class CharacterConrtoller : MonoBehaviour
         //get distance to ground, from centre of collider (where floorcheckers should be)
         float dist = GetComponent<Collider>().bounds.extents.y;
 
-        foreach (Transform check in floorCheckers)
-        {
+     
             RaycastHit hit;
 
-            if (Physics.Raycast(check.position, Vector3.down, out hit, dist + 0.05f, groundedLayerMask))
+            if (Physics.Raycast(this.transform.position, Vector3.down, out hit, dist + 0.05f, groundedLayerMask))
             {
-                Debug.DrawRay(check.position, Vector3.down * (dist + 0.05f), Color.cyan, 0.05f);
+                Debug.DrawRay(this.transform.position, Vector3.down * (dist + 0.05f), Color.cyan, 0.05f);
                 if (!hit.transform.GetComponent<Collider>().isTrigger)
                 { //The object has a real collider not Trigger
 
@@ -122,22 +114,19 @@ public class CharacterConrtoller : MonoBehaviour
                         rbCharacter.AddForce(slide, ForceMode.Force);
                     }
 
-                    //Moving with platforms
-                    //moving platforms
-                    if (hit.transform.tag == "MovingPlatform" || hit.transform.tag == "Pushable")
-                    {
-                        movingObjSpeed = hit.transform.GetComponent<Rigidbody>().velocity;
-                        movingObjSpeed.y = 0f;
-                        //9.5f is a magic number, if youre not moving properly on platforms, experiment with this number
-                        rbCharacter.AddForce(movingObjSpeed * movingPlatformFriction * Time.deltaTime, ForceMode.VelocityChange);
-                    }
-                    else
-                    {
-                        movingObjSpeed = Vector3.zero;
-                    }
-
-
-                    catAnimator.SetBool("Jumping", false);
+                    ////Moving with platforms
+                    ////moving platforms
+                    //if (hit.transform.tag == "MovingPlatform" || hit.transform.tag == "Pushable")
+                    //{
+                    //    movingObjSpeed = hit.transform.GetComponent<Rigidbody>().velocity;
+                    //    movingObjSpeed.y = 0f;
+                    //    //9.5f is a magic number, if youre not moving properly on platforms, experiment with this number
+                    //    rbCharacter.AddForce(movingObjSpeed * movingPlatformFriction * Time.deltaTime, ForceMode.VelocityChange);
+                    //}
+                    //else
+                    //{
+                    //    movingObjSpeed = Vector3.zero;
+                    //}
 
                     Debug.Log("Am touching the floor");
                     //yes our feet are on something    
@@ -146,7 +135,7 @@ public class CharacterConrtoller : MonoBehaviour
 
                 }
             }
-        }
+        
 
         movingObjSpeed = Vector3.zero;
         Debug.Log("Am Not touching the floor");
@@ -169,6 +158,23 @@ public class CharacterConrtoller : MonoBehaviour
         ManageSpeed(curDecel, maxSpeed + movingObjSpeed.magnitude, true);
 
 
+        if (catAnimator)
+        {
+            catAnimator.SetFloat("DistanceToTarget", m_DistanceToTarget);
+
+            if (rbCharacter.velocity.y < 0)
+            {
+                catAnimator.SetBool("Jumping", false);
+            }
+
+            Vector3 velocity = rbCharacter.velocity;
+            velocity.y = 0;
+            catAnimator.SetFloat("XVelocity", velocity.magnitude);
+
+
+            catAnimator.SetFloat("YVelocity", rbCharacter.velocity.y);
+        }
+      
     }
 
 
@@ -214,8 +220,8 @@ public class CharacterConrtoller : MonoBehaviour
         screenMovementForward = screenMovementSpace * Vector3.forward;
         screenMovementRight = screenMovementSpace * Vector3.right;
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
 
 
         //only apply vertical input to movemement, if player is not sidescroller
@@ -234,26 +240,32 @@ public class CharacterConrtoller : MonoBehaviour
         inputDirection = moveDirection - transform.position;
         Debug.DrawRay(transform.position, inputDirection, Color.red);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+
+        if (grounded)
         {
-            running = true;
-            catAnimator.SetBool("Running", true);
-        }
-        else
-        {
-            running = false;
-            catAnimator.SetBool("Running", false);
+            if (Input.GetMouseButton(0) && inputDirection.magnitude > 0)
+            {
+                running = true;
+                catAnimator.SetBool("Running", true);
+            }
+            else
+            {
+                running = false;
+                catAnimator.SetBool("Running", false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (grounded)
+                {
+                    catAnimator.SetBool("Jumping", true);
+                    rbCharacter.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                }
+
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (grounded)
-            {
-                catAnimator.SetBool("Jumping", true);
-                rbCharacter.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-          
-        }
+       
 
 
 
