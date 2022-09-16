@@ -226,18 +226,24 @@ public class CharacterConrtoller : MonoBehaviour
 
         //only apply vertical input to movemement, if player is not sidescroller
         if (!sideScroller)
-            direction = (screenMovementForward * v) + (screenMovementRight * h);
+            inputDirection = (screenMovementForward * v) + (screenMovementRight * h);
         else
-            direction = Vector3.right * h;
+            inputDirection = Vector3.right * h;
 
-        direction.Normalize();
+       
+        if (inputDirection.magnitude > 1.0f)
+        {
+            inputDirection.Normalize();
+        }
 
-        moveDirection = transform.position + direction;
+
+
+        moveDirection = transform.position + inputDirection;
 
         Debug.DrawRay(transform.position, moveDirection, Color.green);
 
 
-        inputDirection = moveDirection - transform.position;
+        
         Debug.DrawRay(transform.position, inputDirection, Color.red);
 
 
