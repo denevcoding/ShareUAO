@@ -4,48 +4,43 @@ using UnityEngine;
 
 public class CharacterConrtoller : MonoBehaviour
 {
+    //My Gameobject Components
     private Rigidbody rbCharacter;
     public Animator catAnimator;
 
     [Header("Platformer properties")]
     public bool sideScroller; // the game is 2.5D?
-    //Gameplay Variables
+
+    //Calculating input direction from the user
     float h;
     float v;
+    private Vector3 inputDirection;
 
-    //Movement
-    public float maxSpeed; //Mas speed of the character
-    private float curAccel, curDecel;
+    private Vector3 direction, moveDirection;
+    private Vector3 screenMovementForward, screenMovementRight;//World space or camera space relative vectors
+    private Quaternion screenMovementSpace = Quaternion.identity;
+
+
+    [Header("Ground detection")]
+    public bool grounded;
+    int groundedLayerMask; //We can add any layers to this mask and combine to evaluate if we are touching players or something else to restore jump
 
     [Header("Movement properties")]
     //Ground
     [Tooltip("Esta variable controla la aceleracion en el suelo")]
+    public float maxSpeed; //Mas speed of the character
     public float accel;
-    public float runningAccel;
     public float decel;
+    public float runningAccel;
 
-
-    public bool running;
-
-    public float jumpForce;
+    private float defaultAccel;
+    private float defaultAirAcel;
 
 
     [Space(20)]
     //Air
-    public float airAccel;  
+    public float airAccel;
     public float airDecel;
-
-    //Movement Vectors
-    [HideInInspector] public Vector3 m_currentSpeed;
-    [HideInInspector] public float m_DistanceToTarget;
-
-
-    //Rotations
-    private Quaternion screenMovementSpace = Quaternion.identity;
-    private float curRotateSpeed;
-
-    private Vector3 direction, moveDirection, screenMovementForward, screenMovementRight;
-    private Vector3 inputDirection;
 
     public float rotateSpeed;//Ground rotation speed;
     public float airRotateSpeed;
@@ -57,151 +52,85 @@ public class CharacterConrtoller : MonoBehaviour
     private Vector3 movingObjSpeed; // Id we are on a platform
 
 
+    //Temporal values to calculate the value of the movement and in the air
+    private float curAccel, curDecel;
+    private float curRotateSpeed;
 
-    //FloorCheks Floor Detection
-    public Transform floorChecks;
-    public Transform[] floorCheckers;
-    private bool grounded;
-    int groundedLayerMask; //We can add any layers to this mask and combine to evaluate if we are touching players or something else to restore jump
+    //Physic Properties 
+    [HideInInspector] public Vector3 m_currentSpeed; //Velocity of the rigidBodie
+    [HideInInspector] public Vector3 currentAngVel;
+    [HideInInspector] public float m_DistanceToTarget; //Value that indicates if I arrived to my next frame position
+
+
+    //Mechanics 
+    [Header("Cat  and running")]
+    public bool running;
+
+    [Header("Cat Jump")]
+    public float jumpForce;
+    public float walkingJumpForce;
+    public float runningJumpForce;
+    public float coyoteTime;
+    public float coyoteTimeCounter;
+
+
+
 
 
     private void Awake()
     {
-        groundedLayerMask = LayerMask.GetMask("Floor");
+      
         rbCharacter = GetComponent<Rigidbody>();
-        InitFloorChecks();
+
+        defaultAccel = accel;
+        defaultAirAcel = airAccel;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-      
+        groundedLayerMask = LayerMask.GetMask("Floor");
     }
 
     // Update is called once per frame
     void Update()
     {
         grounded = IsGrounded(); //Set the animator from here or inside the function
-        catAnimator.SetBool("isGrounded", grounded);
-        Debug.Log(grounded);
-
-        CalculateInputs(); //Update and listen inputs and calculate vector based on sidescroller bool
-
-       
-    }
-
-
-    public bool IsGrounded()
-    {
-        //get distance to ground, from centre of collider (where floorcheckers should be)
-        float dist = GetComponent<Collider>().bounds.extents.y;
+        HandleCoyoteTime();
 
      
-            RaycastHit hit;
+        //Debug.Log(grounded);
 
-            if (Physics.Raycast(this.transform.position, Vector3.down, out hit, dist + 0.05f, groundedLayerMask))
-            {
-                Debug.DrawRay(this.transform.position, Vector3.down * (dist + 0.05f), Color.cyan, 0.05f);
-                if (!hit.transform.GetComponent<Collider>().isTrigger)
-                { //The object has a real collider not Trigger
+        CalculateInputs(); //Update and listen inputs and calculate vector based on sidescroller bool       
 
-                    slope = Vector3.Angle(hit.normal, Vector3.up); //slope control
-
-                    //slide down slopes
-                    if (slope > slopeLimit && hit.transform.tag != "Pusheable")
-                    {
-                        Vector3 slide = new Vector3(0f, -slideAmount, 0f);
-                        rbCharacter.AddForce(slide, ForceMode.Force);
-                    }
-
-                    ////Moving with platforms
-                    ////moving platforms
-                    //if (hit.transform.tag == "MovingPlatform" || hit.transform.tag == "Pushable")
-                    //{
-                    //    movingObjSpeed = hit.transform.GetComponent<Rigidbody>().velocity;
-                    //    movingObjSpeed.y = 0f;
-                    //    //9.5f is a magic number, if youre not moving properly on platforms, experiment with this number
-                    //    rbCharacter.AddForce(movingObjSpeed * movingPlatformFriction * Time.deltaTime, ForceMode.VelocityChange);
-                    //}
-                    //else
-                    //{
-                    //    movingObjSpeed = Vector3.zero;
-                    //}
-
-                    Debug.Log("Am touching the floor");
-                    //yes our feet are on something    
-                
-                    return true;
-
-                }
-            }
-        
-
-        movingObjSpeed = Vector3.zero;
-        Debug.Log("Am Not touching the floor");
-        //no none of the floorchecks hit anything, we must be in the air (or water)
-        return false;
-    }
-
-    private void FixedUpdate()
-    {
-        MoveTo(moveDirection, curAccel, 0.05f, true);
-
-
-        if (rotateSpeed != 0 && direction.magnitude != 0) {
-            RotateToDirection(inputDirection, curRotateSpeed, true);
-            //RotateVelocity(rotateSpeed, true);
-        }
-
-
-
-        ManageSpeed(curDecel, maxSpeed + movingObjSpeed.magnitude, true);
-
-
+        //Setting values to animator
         if (catAnimator)
         {
+            catAnimator.SetBool("isGrounded", grounded);
+
             catAnimator.SetFloat("DistanceToTarget", m_DistanceToTarget);
 
-            if (rbCharacter.velocity.y < 0)
+            if (grounded == false)
             {
-                catAnimator.SetBool("Jumping", false);
+
+                if (rbCharacter.velocity.y < -1)
+                {
+                    catAnimator.SetBool("Falling", true);
+                    catAnimator.SetBool("Jumping", false);
+                }
             }
+            else
+            {
+                catAnimator.SetBool("Falling", false);
+            }
+
+
+
 
             Vector3 velocity = rbCharacter.velocity;
             velocity.y = 0;
             catAnimator.SetFloat("XVelocity", velocity.magnitude);
-
-
             catAnimator.SetFloat("YVelocity", rbCharacter.velocity.y);
-        }
-      
-    }
-
-
-
-
-    private void InitFloorChecks()
-    {
-        //Create a single floorcheck in centre of object, if none are assigned
-        if (!floorChecks)
-        {
-            floorChecks = new GameObject().transform;
-            floorChecks.name = "FloorChecks";
-            floorChecks.parent = transform;
-            floorChecks.position = transform.position;
-            GameObject check = new GameObject();
-            check.name = "Check1";
-            check.transform.parent = floorChecks;
-            check.transform.position = transform.position;
-            Debug.LogWarning("No 'floorChecks' assigned to PlayerMove script, so a single floorcheck has been created", floorChecks);
-        }
-
-        //gets child objects of floorcheckers, and puts them in an array
-        //later these are used to raycast downward and see if we are on the ground
-        floorCheckers = new Transform[floorChecks.childCount];
-        for (int i = 0; i < floorCheckers.Length; i++)
-        {
-            floorCheckers[i] = floorChecks.GetChild(i);
         }
     }
 
@@ -209,7 +138,6 @@ public class CharacterConrtoller : MonoBehaviour
 
     void CalculateInputs()
     {
-        rbCharacter.WakeUp();
 
         //adjust movement values if we're in the air or on the ground
         curAccel = (grounded) ? accel : airAccel;
@@ -230,54 +158,169 @@ public class CharacterConrtoller : MonoBehaviour
         else
             inputDirection = Vector3.right * h;
 
-       
-        if (inputDirection.magnitude > 1.0f)
-        {
-            inputDirection.Normalize();
-        }
 
+        if (inputDirection.magnitude > 1.0f)
+            inputDirection.Normalize();
 
 
         moveDirection = transform.position + inputDirection;
 
-        Debug.DrawRay(transform.position, moveDirection, Color.green);
 
-
-        
+        Debug.DrawRay(transform.position, moveDirection, Color.green);       
         Debug.DrawRay(transform.position, inputDirection, Color.red);
+        Debug.DrawRay(transform.position, rbCharacter.velocity);
 
 
         if (grounded)
         {
             if (Input.GetMouseButton(0) && inputDirection.magnitude > 0)
-            {
+            { //Is Running
                 running = true;
                 catAnimator.SetBool("Running", true);
+                accel = runningAccel;
+                airAccel = 20f;
+                jumpForce = runningJumpForce;
             }
             else
             {
+                //Not Running - So walking
                 running = false;
                 catAnimator.SetBool("Running", false);
+                accel = defaultAccel;
+                airAccel = 5f;
+                jumpForce = walkingJumpForce;
             }
+
+
+    
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (grounded)
                 {
-                    catAnimator.SetBool("Jumping", true);
+                    catAnimator.SetBool("Jumping", true);                 
                     rbCharacter.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 }
 
             }
         }
+        else
+        {
+            running = false;
+            catAnimator.SetBool("Running", false);
+        }
+    }
 
-       
 
 
+    private void FixedUpdate()
+    {
+        rbCharacter.WakeUp();
 
+        MoveTo(moveDirection, curAccel, 0.05f, true);
+
+        //Validate if user is pressing inputs so we need to rotate to llok to that direction
+        if (rotateSpeed != 0 && inputDirection.magnitude != 0)        
+            RotateToDirection(inputDirection, curRotateSpeed, true);
+
+
+        ManageSpeed(curDecel, maxSpeed + movingObjSpeed.magnitude, true);
+
+      
 
     }
 
+    public bool IsGrounded()
+    {
+
+        //get distance to ground, from centre of collider (where floorcheckers should be)
+        float dist = GetComponent<CapsuleCollider>().bounds.extents.y + 0.05f;
+
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, Vector3.down * (dist), Color.cyan, 0.05f);
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, dist + 0.05f, groundedLayerMask))
+        {
+            //FloatingCapsule(hit);
+            return true;
+
+        }
+
+        return false;
+
+
+        ////get distance to ground, from centre of collider (where floorcheckers should be)
+        //float dist = GetComponent<Collider>().bounds.extents.y;
+
+     
+        //    RaycastHit hit;
+
+        //    if (Physics.Raycast(this.transform.position, Vector3.down, out hit, dist + 0.05f, groundedLayerMask))
+        //    {
+        //        Debug.DrawRay(this.transform.position, Vector3.down * (dist + 0.05f), Color.cyan, 0.05f);
+        //        if (!hit.transform.GetComponent<Collider>().isTrigger)
+        //        { //The object has a real collider not Trigger
+
+        //            slope = Vector3.Angle(hit.normal, Vector3.up); //slope control
+
+        //            //slide down slopes
+        //            if (slope > slopeLimit && hit.transform.tag != "Pusheable")
+        //            {
+        //                Vector3 slide = new Vector3(0f, -slideAmount, 0f);
+        //                rbCharacter.AddForce(slide, ForceMode.Force);
+        //            }
+
+        //            ////Moving with platforms
+        //            ////moving platforms
+        //            //if (hit.transform.tag == "MovingPlatform" || hit.transform.tag == "Pushable")
+        //            //{
+        //            //    movingObjSpeed = hit.transform.GetComponent<Rigidbody>().velocity;
+        //            //    movingObjSpeed.y = 0f;
+        //            //    //9.5f is a magic number, if youre not moving properly on platforms, experiment with this number
+        //            //    rbCharacter.AddForce(movingObjSpeed * movingPlatformFriction * Time.deltaTime, ForceMode.VelocityChange);
+        //            //}
+        //            //else
+        //            //{
+        //            //    movingObjSpeed = Vector3.zero;
+        //            //}
+
+        //            Debug.Log("Am touching the floor");
+        //            //yes our feet are on something    
+                
+        //            return true;
+
+        //        }
+        //    }
+        
+
+        //movingObjSpeed = Vector3.zero;
+        //Debug.Log("Am Not touching the floor");
+        ////no none of the floorchecks hit anything, we must be in the air (or water)
+        //return false;
+    }
+
+    public void HandleCoyoteTime()
+    {
+        //Coyote time to have a responsive jumop
+        if (grounded)
+        {
+            //On the ground
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            //Falling or in the air
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
+
+
+
+
+  
+
+
+
+   
 
     public bool MoveTo(Vector3 destination, float acceleration, float stopDistance, bool ignoreY) 
     {
@@ -324,16 +367,20 @@ public class CharacterConrtoller : MonoBehaviour
 
         if (m_currentSpeed.magnitude > 0)
         {
-            if (running)
-            {
-                if (rbCharacter.velocity.magnitude > 10)
-                    rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
-            }
-            else
-            {
-                if (rbCharacter.velocity.magnitude > maxSpeed)
-                    rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
-            }
+            rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+            if (rbCharacter.velocity.magnitude > maxSpeed)
+                rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+
+            //if (running)
+            //{
+            //    if (rbCharacter.velocity.magnitude > 10)
+            //        rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+            //}
+            //else
+            //{
+            //    if (rbCharacter.velocity.magnitude > maxSpeed)
+            //        rbCharacter.AddForce((m_currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+            //}
            
         }
 
@@ -365,6 +412,7 @@ public class CharacterConrtoller : MonoBehaviour
 
     public void RotateToDirection(Vector3 lookDir, float turnSpeed, bool ignoreY)
     {
+        currentAngVel = rbCharacter.angularVelocity;
 
         Vector3 characterPos = transform.position;
         if (ignoreY)
