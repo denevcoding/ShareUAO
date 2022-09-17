@@ -6,6 +6,8 @@ public class movimiento : MonoBehaviour
 {
     public float velocidad;
     public int numerodeitems;
+    public GameObject prefabBala;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,16 @@ public class movimiento : MonoBehaviour
     {
         transform.Translate(Input.GetAxis("Horizontal") * velocidad, 0, Input.GetAxis("Vertical") * velocidad);
         transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
-        //transform.Translate(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+         
+        if(Input.GetButtonDown("Fire1"))
+        {
+            GameObject balaAuxiliar = Instantiate( prefabBala, transform.position + transform.forward * 5, Quaternion.identity);
+            balaAuxiliar.GetComponent<Rigidbody>().AddForce( transform.forward * 1000);
+            Destroy(balaAuxiliar, 3);
+           
+        }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
