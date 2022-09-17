@@ -7158,6 +7158,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Atun Character
       objectReference: {fileID: 0}
+    - target: {fileID: 6333070843964192584, guid: 9d5423f991818524d834d8b21d862afa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7ccf36fbb0e4519afe82ad260d3846, type: 2}
+    - target: {fileID: 6337082840675179316, guid: 9d5423f991818524d834d8b21d862afa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7ccf36fbb0e4519afe82ad260d3846, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d5423f991818524d834d8b21d862afa, type: 3}
 --- !u!1001 &1947395533
