@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemTytpe
+{
+    Atun,
+    Fish,
+    Yaya
+}
+
 public class CharacterConrtoller : MonoBehaviour
 {
     //My Gameobject Components
     private Rigidbody rbCharacter;
     public Animator catAnimator;
+
+    public ItemTytpe itemType;
+
+    public Transform Cam;
 
     [Header("Platformer properties")]
     public bool sideScroller; // the game is 2.5D?
@@ -145,8 +156,8 @@ public class CharacterConrtoller : MonoBehaviour
         curRotateSpeed = (grounded) ? rotateSpeed : airRotateSpeed;
 
         //get movement axis relative to camera
-        screenMovementForward = screenMovementSpace * Vector3.forward;
-        screenMovementRight = screenMovementSpace * Vector3.right;
+        screenMovementForward = screenMovementSpace * Cam.forward;
+        screenMovementRight = screenMovementSpace * Cam.right;
 
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
@@ -158,9 +169,17 @@ public class CharacterConrtoller : MonoBehaviour
         else
             inputDirection = Vector3.right * h;
 
-
-        if (inputDirection.magnitude > 1.0f)
+        //inputDirection = new Vector3(h, 0f, v);
+        
+        if (inputDirection.magnitude > 0.1f) {
             inputDirection.Normalize();
+
+            //float targetAngle = Mathf.Atan2(inputDirection.x, direction.z) * Mathf.Rad2Deg + Cam.eulerAngles.y;
+            //float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref t);
+            //moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        }
+           
+
 
 
         moveDirection = transform.position + inputDirection;
@@ -178,7 +197,7 @@ public class CharacterConrtoller : MonoBehaviour
                 running = true;
                 catAnimator.SetBool("Running", true);
                 accel = runningAccel;
-                airAccel = 20f;
+                airAccel = 10f;
                 jumpForce = runningJumpForce;
             }
             else
@@ -425,7 +444,7 @@ public class CharacterConrtoller : MonoBehaviour
 
 
         turnSpeed *= 1.6f;
-        Quaternion dirQ = Quaternion.LookRotation(inputDirection);
+        Quaternion dirQ = Quaternion.LookRotation(lookDir);
         Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, turnSpeed * Time.deltaTime);
         rbCharacter.MoveRotation(slerp);
     }

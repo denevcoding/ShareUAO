@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catAnimator: {fileID: 7560392262485588651}
+  itemType: 0
+  Cam: {fileID: 0}
   sideScroller: 0
   grounded: 0
   maxSpeed: 50
@@ -155,7 +157,7 @@ MonoBehaviour:
   decel: 10
   runningAccel: 50
   airAccel: 5
-  airDecel: 0
+  airDecel: 3
   rotateSpeed: 5
   airRotateSpeed: 2
   slopeLimit: 80
@@ -165,9 +167,9 @@ MonoBehaviour:
   currentAngVel: {x: 0, y: 0, z: 0}
   m_DistanceToTarget: 0
   running: 0
-  jumpForce: 10
+  jumpForce: 8
   walkingJumpForce: 8
-  runningJumpForce: 12
+  runningJumpForce: 10
   coyoteTime: 0
   coyoteTimeCounter: -3.4073942
 --- !u!54 &1235424737474531977
@@ -179,8 +181,8 @@ Rigidbody:
   m_GameObject: {fileID: 1235424737474531976}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 1
+  m_Drag: 0
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
