@@ -118,7 +118,7 @@ public class CharacterConrtoller : MonoBehaviour
         {
             GameObject balaAuxiliar = Instantiate(Sphere, transform.position + transform.forward , Quaternion.identity);
             balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
-            Destroy(balaAuxiliar, 3);
+            Destroy(balaAuxiliar, 1);
 
         }
 
