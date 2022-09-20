@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class enemigo : MonoBehaviour
 {
     public int vida = 3;
-   // public int comportamiento = 1; // 1 va a ser para perseguir y el 2 para patrullar
+    public int comportamiento = 1; // 1 va a ser para perseguir y el 2 para patrullar
     GameObject jugador;
     // Start is called before the first frame update
     void Start()
     {
         jugador = GameObject.Find("Atun _Character");
-        //comportamiento = Random.Range(1, 3);
+        comportamiento = Random.Range(1, 3);
 
         InvokeRepeating("CambiarDireccion", 3, 3);
     }
@@ -20,16 +20,16 @@ public class enemigo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //  if(comportamiento == 1)
-       // {
+       if(comportamiento == 1)
+        {
             transform.LookAt(jugador.transform);
             GetComponent<Rigidbody>().velocity = transform.forward * 2;
-      //  }
-        //else
-        //{
-          //  GetComponent<Rigidbody>().velocity = transform.forward ;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().velocity = transform.forward ;
 
-        //}
+        }
        
     }
 
