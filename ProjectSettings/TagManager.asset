@@ -6,6 +6,7 @@ TagManager:
   tags:
   - zona
   - item
+  - Bala
   layers:
   - Default
   - TransparentFX

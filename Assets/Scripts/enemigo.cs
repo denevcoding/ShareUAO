@@ -25,5 +25,14 @@ public class enemigo : MonoBehaviour
         if (collision.collider.name == "Atun _Character") 
 
         Debug.Log("Miau, nos acaban de agarrar");
+
+        if (collision.collider.tag == "Bala")
+        {
+            Destroy(collision.collider.gameObject);
+            vida = vida - 1;
+            if (vida == 0)
+                Destroy(gameObject);
+        }
+
     }
 }

@@ -922,6 +922,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 215113953006445946, guid: 2ac693e30ab46684aa07d4779e45fd57,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bala
+      objectReference: {fileID: 0}
     - target: {fileID: 215113953006445951, guid: 2ac693e30ab46684aa07d4779e45fd57,
         type: 3}
       propertyPath: m_RootOrder
@@ -1066,8 +1071,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054425753}
-  m_LocalRotation: {x: -0.009626649, y: -0.000000017340927, z: 0.0000000037222678,
-    w: 0.9999537}
+  m_LocalRotation: {x: -0.009626649, y: 0.000000017340938, z: -0.00000000372227, w: 0.9999537}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
