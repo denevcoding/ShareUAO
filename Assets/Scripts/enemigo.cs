@@ -24,11 +24,11 @@ public class enemigo : MonoBehaviour
             transform.LookAt(jugador.transform);
             GetComponent<Rigidbody>().velocity = transform.forward * 2;
         }
-        else
-        {
-            GetComponent<Rigidbody>().velocity = transform.forward ;
+        //else
+        //{
+          //  GetComponent<Rigidbody>().velocity = transform.forward ;
 
-        }
+        //}
        
     }
 

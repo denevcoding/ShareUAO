@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class villano : MonoBehaviour
 {
+    public GameObject item;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,7 @@ public class villano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.LookAt(item.transform);
+        GetComponent<Rigidbody>().velocity = transform.right * 5;
     }
 }
