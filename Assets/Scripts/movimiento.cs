@@ -31,13 +31,13 @@ public class movimiento : MonoBehaviour
         
     }
 
+   // private void OnTriggerEnter(Collider other)
+   // {
+       // if(other.name == "Cube A")
+        //Debug.Log("hemos entrado al cubo A");
+        //GetComponent<AudioSource>().Play();
+    //}
     private void OnTriggerEnter(Collider other)
-    {
-        if(other.name == "Cube A")
-        Debug.Log("hemos entrado al cubo A");
-        GetComponent<AudioSource>().Play();
-    }
-    private void OnTriggerExit(Collider other)
     {
         if (other.tag == "item")
             Debug.Log("hemos cogido un item");

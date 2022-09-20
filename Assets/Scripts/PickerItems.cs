@@ -25,8 +25,15 @@ public class PickerItems : MonoBehaviour
             Debug.Log("hemos cogido una lata de Atún");
             Destroy(other.gameObject);
             numerodeitems = numerodeitems + 1;
+
+            if (other.name == "pCylinder3")
+                Debug.Log("hemos entrado al cubo A");
+            GetComponent<AudioSource>().Play();
         }
+      
+       
            
+
     }
 
 

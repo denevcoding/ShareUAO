@@ -64,4 +64,5 @@ public class CatController : MonoBehaviour
         Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, 2f * Time.deltaTime);
         rbCharacter.MoveRotation(slerp);
     }
+
 }
