@@ -7,7 +7,7 @@ public class CatController : MonoBehaviour
 
     private Rigidbody rbCharacter;
     public Animator catAnimator;
-
+    public GameObject prefabBala;
     int groundedLayerMask;
     private bool grounded;
 
@@ -36,6 +36,14 @@ public class CatController : MonoBehaviour
     {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject balaAuxiliar = Instantiate(prefabBala, transform.position + transform.forward * 5, Quaternion.identity);
+            balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
+            Destroy(balaAuxiliar, 3);
+
+        }
 
         inputDirection = new Vector2(h, v);
         inputDirection.Normalize();
