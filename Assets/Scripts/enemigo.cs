@@ -17,7 +17,7 @@ public class enemigo : MonoBehaviour
     void Update()
     {
         transform.LookAt(jugador.transform);
-        GetComponent<Rigidbody>().velocity = transform.forward;
+        GetComponent<Rigidbody>().velocity = transform.forward * 2;
     }
 
     private void OnCollisionEnter(Collision collision)

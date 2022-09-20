@@ -19,6 +19,9 @@ public class CharacterConrtoller : MonoBehaviour
 
     public Transform Cam;
 
+    public int numerodeitems;
+    public GameObject Sphere;
+
     [Header("Platformer properties")]
     public bool sideScroller; // the game is 2.5D?
 
@@ -108,8 +111,20 @@ public class CharacterConrtoller : MonoBehaviour
     {
         grounded = IsGrounded(); //Set the animator from here or inside the function
         HandleCoyoteTime();
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
 
-     
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject balaAuxiliar = Instantiate(Sphere, transform.position + transform.forward , Quaternion.identity);
+            balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
+            Destroy(balaAuxiliar, 3);
+
+        }
+
+        inputDirection = new Vector2(h, v);
+        inputDirection.Normalize();
+
         //Debug.Log(grounded);
 
         CalculateInputs(); //Update and listen inputs and calculate vector based on sidescroller bool       
@@ -330,6 +345,8 @@ public class CharacterConrtoller : MonoBehaviour
             //Falling or in the air
             coyoteTimeCounter -= Time.deltaTime;
         }
+
+        
     }
 
 
