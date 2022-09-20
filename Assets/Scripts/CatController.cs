@@ -7,7 +7,7 @@ public class CatController : MonoBehaviour
 
     private Rigidbody rbCharacter;
     public Animator catAnimator;
-    public GameObject prefabBala;
+    public GameObject Sphere;
     int groundedLayerMask;
     private bool grounded;
 
@@ -34,12 +34,19 @@ public class CatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject balaAuxiliar = Instantiate(Sphere, transform.position + transform.forward * 5, Quaternion.identity);
+            balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
+            Destroy(balaAuxiliar, 3);
+
+        }
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject balaAuxiliar = Instantiate(prefabBala, transform.position + transform.forward * 5, Quaternion.identity);
+            GameObject balaAuxiliar = Instantiate(Sphere, transform.position + transform.forward * 5, Quaternion.identity);
             balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
             Destroy(balaAuxiliar, 3);
 

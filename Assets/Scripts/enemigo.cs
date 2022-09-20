@@ -19,4 +19,11 @@ public class enemigo : MonoBehaviour
         transform.LookAt(jugador.transform);
         GetComponent<Rigidbody>().velocity = transform.forward;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.name == "Atun _Character") 
+
+        Debug.Log("Miau, nos acaban de agarrar");
+    }
 }
