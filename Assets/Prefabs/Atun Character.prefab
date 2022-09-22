@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 1235424737474531982}
   - component: {fileID: 1235424737474531977}
   - component: {fileID: 8939610157896774211}
+  - component: {fileID: 7241103267361830704}
   m_Layer: 0
   m_Name: Atun Character
   m_TagString: Untagged
@@ -150,6 +151,8 @@ MonoBehaviour:
   catAnimator: {fileID: 7560392262485588651}
   itemType: 0
   Cam: {fileID: 0}
+  numerodeitems: 0
+  Sphere: {fileID: 0}
   sideScroller: 0
   grounded: 0
   maxSpeed: 50
@@ -201,6 +204,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catAnimator: {fileID: 0}
+  Sphere: {fileID: 0}
+--- !u!114 &7241103267361830704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235424737474531976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b6db1c8be2eb44dab94f916c680389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1235424737587452888
 GameObject:
   m_ObjectHideFlags: 0

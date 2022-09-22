@@ -114,13 +114,13 @@ public class CharacterConrtoller : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            GameObject balaAuxiliar = Instantiate(Sphere, transform.position + transform.forward , Quaternion.identity);
-            balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * 1000);
-            Destroy(balaAuxiliar, 2);
+        //if (input.getbuttondown("fire2"))
+        //{
+        //    gameobject balaauxiliar = instantiate(sphere, transform.position/* + transform.forward*/ , quaternion.identity);
+        //    balaauxiliar.getcomponent<rigidbody>().addforce(transform.forward * 1000);
+        //    destroy(balaauxiliar, 2);
 
-        }
+        //}
 
         inputDirection = new Vector2(h, v);
         inputDirection.Normalize();
