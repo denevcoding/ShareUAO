@@ -33,6 +33,9 @@ public class Shooter : MonoBehaviour
             {
                 GameObject balaAuxiliar = Instantiate(Bullet, soket.position, Quaternion.identity);
                 balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce);
+                
+                picker.SubstractItem();
+
                 Destroy(balaAuxiliar, 2);
             }
         }
