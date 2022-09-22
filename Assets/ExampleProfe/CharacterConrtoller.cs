@@ -20,7 +20,6 @@ public class CharacterConrtoller : MonoBehaviour
     public Transform Cam;
 
     public int numerodeitems;
-    public GameObject Sphere;
 
     [Header("Platformer properties")]
     public bool sideScroller; // the game is 2.5D?

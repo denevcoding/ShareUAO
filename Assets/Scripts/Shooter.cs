@@ -11,10 +11,12 @@ public class Shooter : MonoBehaviour
 
     public float shootForce;
 
+    public PickerItems picker;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       // picker = GetComponent<PickerItems>();   
     }
 
     // Update is called once per frame
@@ -27,10 +29,12 @@ public class Shooter : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2"))
         {
-            GameObject balaAuxiliar = Instantiate(Bullet, soket.position, Quaternion.identity);
-            balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce);
-            Destroy(balaAuxiliar, 2);
-
+            if (picker.numerodeitems > 0)
+            {
+                GameObject balaAuxiliar = Instantiate(Bullet, soket.position, Quaternion.identity);
+                balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce);
+                Destroy(balaAuxiliar, 2);
+            }
         }
     }
 

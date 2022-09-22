@@ -6,7 +6,6 @@ public class PickerItems : MonoBehaviour
 {
     public int numerodeitems;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +17,8 @@ public class PickerItems : MonoBehaviour
     {
         
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "item")
@@ -30,9 +31,6 @@ public class PickerItems : MonoBehaviour
                 Debug.Log("hemos entrado al cubo A");
             GetComponent<AudioSource>().Play();
         }
-      
-       
-           
 
     }
 
