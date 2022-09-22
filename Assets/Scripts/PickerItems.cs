@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickerItems : MonoBehaviour
 {
     public int numerodeitems;
+    public PlayerUI uiPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,10 @@ public class PickerItems : MonoBehaviour
             Destroy(other.gameObject);
             numerodeitems = numerodeitems + 1;
 
+            uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
+
+
+
             if (other.name == "pCylinder3")
                 Debug.Log("hemos entrado al cubo A");
             GetComponent<AudioSource>().Play();
@@ -43,6 +48,17 @@ public class PickerItems : MonoBehaviour
             numerodeitems = numerodeitems + 1;
         }
            
+    }
+
+    public void SubstractItem()
+    {
+        if (numerodeitems > 0) {
+
+            numerodeitems = numerodeitems - 1;
+            uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
+
+        }        
+                 
     }
 
 }
