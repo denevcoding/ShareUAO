@@ -206,7 +206,7 @@ public class CharacterConrtoller : MonoBehaviour
 
         if (grounded)
         {
-            if (Input.GetMouseButton(0) && inputDirection.magnitude > 0)
+            if (Input.GetKey(KeyCode.LeftShift) && inputDirection.magnitude > 0)
             { //Is Running
                 running = true;
                 catAnimator.SetBool("Running", true);
