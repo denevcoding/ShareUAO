@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BotonSalir : MonoBehaviour
 {
+    public float loca;
+    
     // Start is called before the first frame update
     void Start()
     {
