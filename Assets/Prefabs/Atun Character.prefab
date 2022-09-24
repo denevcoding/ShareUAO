@@ -152,7 +152,6 @@ MonoBehaviour:
   itemType: 0
   Cam: {fileID: 0}
   numerodeitems: 0
-  Sphere: {fileID: 0}
   sideScroller: 0
   grounded: 0
   maxSpeed: 50
@@ -217,6 +216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b6db1c8be2eb44dab94f916c680389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numerodeitems: 0
+  Bullet: {fileID: 0}
+  soket: {fileID: 0}
+  shootForce: 0
+  picker: {fileID: 0}
 --- !u!1 &1235424737587452888
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +627,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -26.67878
       objectReference: {fileID: 0}
+    - target: {fileID: -1269193219169685390, guid: eb3f98c3a37324bfe8dd1f04243bb492,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7ccf36fbb0e4519afe82ad260d3846, type: 2}
     - target: {fileID: -1269193219169685390, guid: eb3f98c3a37324bfe8dd1f04243bb492,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
