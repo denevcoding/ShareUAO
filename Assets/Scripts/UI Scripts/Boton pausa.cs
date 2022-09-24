@@ -19,10 +19,11 @@ public static bool GameIsPaused = false;
     }
 
      public void Resume ()
-
     {
 
-        BotonPausa.SetActive(false);
+        
+
+        gameObject.SetActive(false);
 
         Time.timeScale = 1f;
 
@@ -34,7 +35,7 @@ public static bool GameIsPaused = false;
 
     {
 
-        BotonPausa.SetActive(true);
+        gameObject.SetActive(true);
 
         Time.timeScale = 0f;
 
