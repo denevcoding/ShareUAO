@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BotonSalir : MonoBehaviour
+public class BotonInicio : MonoBehaviour
 {
-    public float loca;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +17,8 @@ public class BotonSalir : MonoBehaviour
         
     }
 
-    public void Salir()
+    public void Inicio()
     {
-        SceneManager.LoadScene("Portada");
+        SceneManager.LoadScene("Cat settings");
     }
 }
