@@ -114,17 +114,17 @@ PrefabInstance:
     - target: {fileID: 7538851963333723717, guid: 374dce8dda2c07a468935f0503299ffc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.3
+      value: -6.93
       objectReference: {fileID: 0}
     - target: {fileID: 7538851963333723717, guid: 374dce8dda2c07a468935f0503299ffc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.68
+      value: 4.21
       objectReference: {fileID: 0}
     - target: {fileID: 7538851963333723717, guid: 374dce8dda2c07a468935f0503299ffc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.18
+      value: -17.76714
       objectReference: {fileID: 0}
     - target: {fileID: 7538851963333723717, guid: 374dce8dda2c07a468935f0503299ffc,
         type: 3}
@@ -166,6 +166,11 @@ PrefabInstance:
       propertyPath: comportamiento
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7538851963333723722, guid: 374dce8dda2c07a468935f0503299ffc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7538851963333723723, guid: 374dce8dda2c07a468935f0503299ffc,
         type: 3}
       propertyPath: m_Enabled
@@ -174,10 +179,38 @@ PrefabInstance:
     - target: {fileID: 7538851963333723727, guid: 374dce8dda2c07a468935f0503299ffc,
         type: 3}
       propertyPath: m_Name
-      value: enemigo
+      value: enemigo Variant (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 374dce8dda2c07a468935f0503299ffc, type: 3}
+--- !u!1 &2059873818377225762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7538851963333723727, guid: 374dce8dda2c07a468935f0503299ffc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8361290848125829229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1953134375
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059873818377225762}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.0000002
+  m_BaseOffset: 1.0000001
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &2059873818377225768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7538851963333723717, guid: 374dce8dda2c07a468935f0503299ffc,
