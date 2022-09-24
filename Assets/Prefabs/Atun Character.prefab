@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1865666525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1865666526}
+  m_Layer: 0
+  m_Name: SOKET ATUN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1865666526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865666525}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.018, y: -0.127, z: 0.607}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235424737474531970}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235424736993404849
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +78,7 @@ GameObject:
   - component: {fileID: 1235424737474531977}
   - component: {fileID: 8939610157896774211}
   - component: {fileID: 7241103267361830704}
+  - component: {fileID: 7866377135022581310}
   m_Layer: 0
   m_Name: Atun Character
   m_TagString: Untagged
@@ -69,6 +101,7 @@ Transform:
   - {fileID: 4470882972856049873}
   - {fileID: 1235424737706598084}
   - {fileID: 1235424737587452889}
+  - {fileID: 1865666526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -149,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catAnimator: {fileID: 7560392262485588651}
+  soundManager: {fileID: 0}
   itemType: 0
   Cam: {fileID: 0}
   numerodeitems: 0
@@ -174,6 +208,7 @@ MonoBehaviour:
   runningJumpForce: 10
   coyoteTime: 0
   coyoteTimeCounter: -3.4073942
+  ronroneo: {fileID: 0}
 --- !u!54 &1235424737474531977
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -217,10 +252,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numerodeitems: 0
-  Bullet: {fileID: 0}
-  soket: {fileID: 0}
-  shootForce: 0
-  picker: {fileID: 0}
+  Bullet: {fileID: 9003894386548403606, guid: dea0698bb27719946a7274e344c82f91, type: 3}
+  soket: {fileID: 1865666526}
+  shootForce: 1000
+  picker: {fileID: 7866377135022581310}
+--- !u!114 &7866377135022581310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235424737474531976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74d585cc3533974c8c41babe2b7a310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numerodeitems: 0
 --- !u!1 &1235424737587452888
 GameObject:
   m_ObjectHideFlags: 0
