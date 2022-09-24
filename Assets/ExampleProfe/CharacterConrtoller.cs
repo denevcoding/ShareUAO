@@ -211,7 +211,7 @@ public class CharacterConrtoller : MonoBehaviour
                 running = true;
                 catAnimator.SetBool("Running", true);
                 accel = runningAccel;
-                airAccel = 10f;
+                airAccel = 15f;
                 jumpForce = runningJumpForce;
             }
             else
