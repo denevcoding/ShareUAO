@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,11 +5,11 @@ public class enemigo : MonoBehaviour
 {
     public int vida = 3;
     public int comportamiento = 1; // 1 va a ser para perseguir y el 2 para patrullar
-    GameObject jugador;
+    public GameObject jugador;
     // Start is called before the first frame update
     void Start()
     {
-        jugador = GameObject.Find("Atun _Character");
+       // jugador = GameObject.Find("Atun _Character");
         comportamiento = Random.Range(1, 3);
 
         InvokeRepeating("CambiarDireccion", 3, 3);
@@ -21,6 +19,7 @@ public class enemigo : MonoBehaviour
     void Update()
     {
        if(comportamiento == 1)
+
         {
             transform.LookAt(jugador.transform);
             GetComponent<Rigidbody>().velocity = transform.forward * 2;
@@ -40,7 +39,7 @@ public class enemigo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == "Atun _Character")
+        if (collision.collider.name == "Atun Character")
         {
             Debug.Log("Miau, nos acaban de agarrar");
             SceneManager.LoadScene(0);

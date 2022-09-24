@@ -27,7 +27,7 @@ public class villano : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == "Atun _Character")
+        if (collision.collider.name == "Atun Character")
         {
             Debug.Log("Miau, nos acaban de agarrar");
             SceneManager.LoadScene(0);
