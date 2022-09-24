@@ -19,6 +19,6 @@ public class BotonInicio : MonoBehaviour
 
     public void Inicio()
     {
-        SceneManager.LoadScene("Cat settings");
+        SceneManager.LoadScene("Gameplay Scene");
     }
 }
