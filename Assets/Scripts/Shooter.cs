@@ -27,7 +27,7 @@ public class Shooter : MonoBehaviour
 
     public void Shoot()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire1"))
         {
             if (picker.numerodeitems > 0)
             {
