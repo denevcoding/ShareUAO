@@ -17,8 +17,12 @@ public class villano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(item.transform);
-        GetComponent<Rigidbody>().velocity = transform.right * velocidad;
+        if (item != null)
+        {
+            transform.LookAt(item.transform);
+            GetComponent<Rigidbody>().velocity = transform.right * velocidad;
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)

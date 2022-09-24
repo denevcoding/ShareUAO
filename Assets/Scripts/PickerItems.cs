@@ -25,16 +25,17 @@ public class PickerItems : MonoBehaviour
         if (other.tag == "item")
         {
             Debug.Log("hemos cogido una lata de Atún");
-            Destroy(other.gameObject);
+            
             numerodeitems = numerodeitems + 1;
 
             uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
 
-
-
             if (other.name == "pCylinder3")
                 Debug.Log("hemos entrado al cubo A");
-            GetComponent<AudioSource>().Play();
+
+            //GetComponent<AudioSource>().Play();
+
+            Destroy(other.gameObject);
         }
 
     }
