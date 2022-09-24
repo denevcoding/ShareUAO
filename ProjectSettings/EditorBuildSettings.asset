@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/enemigo/Cat settings 1.unity
     guid: ca57a3bc784aca94f9b10cf826307bd3
+  - enabled: 1
+    path: Assets/Scenes/Cat settings.unity
+    guid: 5e33d35d875a04dc2a00d9a5034eb7ab
   m_configObjects: {}
