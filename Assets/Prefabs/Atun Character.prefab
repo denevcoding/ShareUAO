@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 8939610157896774211}
   - component: {fileID: 7241103267361830704}
   - component: {fileID: 7866377135022581310}
+  - component: {fileID: 3010659068908655850}
   m_Layer: 0
   m_Name: Atun Character
   m_TagString: Untagged
@@ -102,6 +103,7 @@ Transform:
   - {fileID: 1235424737706598084}
   - {fileID: 1235424737587452889}
   - {fileID: 1865666526}
+  - {fileID: 8684322485248773687}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255,8 +257,21 @@ MonoBehaviour:
   Bullet: {fileID: 9003894386548403606, guid: dea0698bb27719946a7274e344c82f91, type: 3}
   soket: {fileID: 1865666526}
   shootForce: 1000
-  picker: {fileID: 7866377135022581310}
+  picker: {fileID: 3010659068908655850}
 --- !u!114 &7866377135022581310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235424737474531976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74d585cc3533974c8c41babe2b7a310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numerodeitems: 0
+--- !u!114 &3010659068908655850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,6 +412,37 @@ Transform:
   - {fileID: 1235424736993404854}
   m_Father: {fileID: 1235424737474531970}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4893686046597247685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8684322485248773687}
+  m_Layer: 0
+  m_Name: SOKET ATUN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8684322485248773687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893686046597247685}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.018, y: -0.127, z: 0.607}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235424737474531970}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4143730696668579642
 PrefabInstance:

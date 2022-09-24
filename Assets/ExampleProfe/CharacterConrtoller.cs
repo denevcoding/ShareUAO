@@ -194,14 +194,14 @@ public class CharacterConrtoller : MonoBehaviour
         
         if (inputDirection.magnitude > 0.1f) {
             inputDirection.Normalize();
-            soundManager.CleanClip();
+            //soundManager.CleanClip();
             //float targetAngle = Mathf.Atan2(inputDirection.x, direction.z) * Mathf.Rad2Deg + Cam.eulerAngles.y;
             //float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref t);
             //moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         }
         else
         {
-            soundManager.PlaySound(ronroneo);
+            //soundManager.PlaySound(ronroneo);
         }
 
 
