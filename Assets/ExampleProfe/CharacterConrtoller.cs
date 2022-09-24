@@ -14,6 +14,7 @@ public class CharacterConrtoller : MonoBehaviour
     //My Gameobject Components
     private Rigidbody rbCharacter;
     public Animator catAnimator;
+    public CatSoundManager soundManager;
 
     public ItemTytpe itemType;
 
@@ -87,6 +88,10 @@ public class CharacterConrtoller : MonoBehaviour
     public float coyoteTimeCounter;
 
 
+    [Header("Sounds")]
+    public AudioClip ronroneo;
+
+
 
 
 
@@ -94,6 +99,8 @@ public class CharacterConrtoller : MonoBehaviour
     {
       
         rbCharacter = GetComponent<Rigidbody>();
+        //soundManager = GetComponent<CatSoundManager>();
+
 
         defaultAccel = accel;
         defaultAirAcel = airAccel;
@@ -187,13 +194,18 @@ public class CharacterConrtoller : MonoBehaviour
         
         if (inputDirection.magnitude > 0.1f) {
             inputDirection.Normalize();
-
+            soundManager.CleanClip();
             //float targetAngle = Mathf.Atan2(inputDirection.x, direction.z) * Mathf.Rad2Deg + Cam.eulerAngles.y;
             //float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref t);
             //moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         }
-           
+        else
+        {
+            soundManager.PlaySound(ronroneo);
+        }
 
+
+        
 
 
         moveDirection = transform.position + inputDirection;
