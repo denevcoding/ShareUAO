@@ -20,7 +20,7 @@ public class villano : MonoBehaviour
         if (item != null)
         {
             transform.LookAt(item.transform);
-            GetComponent<Rigidbody>().velocity = transform.right * velocidad;
+            GetComponent<Rigidbody>().velocity = transform.right * velocidad * Time.deltaTime;
         }
 
     }
