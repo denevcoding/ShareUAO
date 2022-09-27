@@ -89,7 +89,7 @@ public class enemigo : MonoBehaviour
         if (collision.collider.name == "Atun Character")
         {
             Debug.Log("Miau, nos acaban de agarrar");
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
 
         }
         

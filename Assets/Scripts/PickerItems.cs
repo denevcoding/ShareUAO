@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PickerItems : MonoBehaviour
 {
     public int numerodeitems;
     public int numerodeMedallones;
- //   public PlayerUI uiPlayer;
+    public int numerodeVidas;
+    public PlayerUI uiPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,7 @@ public class PickerItems : MonoBehaviour
             
             numerodeitems = numerodeitems + 1;
 
-           // uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
+           uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
 
             if (other.tag == "medallon_Curry")
                Debug.Log("¡¡Hemos recogido un Medallón!!");
@@ -62,13 +64,31 @@ public class PickerItems : MonoBehaviour
         {
             Debug.Log("hemos cogido una lata de Atún COLLISION");
 
-            numerodeitems = numerodeitems + 1;
+            numerodeMedallones = numerodeMedallones + 1;
 
 
 
 
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.tag == "enemigo")
+        {
+            Debug.Log("miau nos acaban de agarrar");
+
+            numerodeVidas = numerodeVidas - 1;
+
+
+            if (numerodeVidas == 0)
+
+            {
+                SceneManager.LoadScene("GameOVer");
+            }
+
+
+            // Destroy(collision.gameObject);
+        }
+
 
 
 
@@ -80,10 +100,11 @@ public class PickerItems : MonoBehaviour
         {
 
             numerodeitems = numerodeitems - 1;
-            // uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
+            uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
 
         }
 
+      
     }
 }
 
