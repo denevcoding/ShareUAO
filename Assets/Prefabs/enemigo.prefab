@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7538851963333723716}
   - component: {fileID: 7538851963333723723}
   - component: {fileID: 7538851963333723722}
-  - component: {fileID: 7538851963333723721}
   - component: {fileID: 7538851963333723720}
   - component: {fileID: 7538851963333723718}
+  - component: {fileID: 7538851963333723721}
   m_Layer: 0
   m_Name: enemigo
   m_TagString: Untagged
@@ -101,20 +101,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7538851963333723721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7538851963333723727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc5d8a3e6d7a71149b306b44f6532c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 3
-  comportamiento: 1
 --- !u!54 &7538851963333723720
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,8 +124,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538851963333723727}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec0ecd52241f6aa4eb882d5cbbf08703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7538851963333723721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7538851963333723727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5d8a3e6d7a71149b306b44f6532c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 3
+  comportamiento: 1
+  jugador: {fileID: 0}
+  cam: {fileID: 0}
+  agent: {fileID: 0}
+  lvlManager: {fileID: 0}
+  currentPoint: {fileID: 0}

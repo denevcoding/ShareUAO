@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {    
-
     public int numerodeitems;
     public GameObject Bullet;
     public Transform soket;
@@ -16,6 +15,7 @@ public class Shooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        picker = GetComponent<PickerItems>();
        // picker = GetComponent<PickerItems>();   
     }
 
@@ -32,11 +32,13 @@ public class Shooter : MonoBehaviour
             if (picker.numerodeitems > 0)
             {
                 GameObject balaAuxiliar = Instantiate(Bullet, soket.position, Quaternion.identity);
+
+                balaAuxiliar.GetComponent<item>().SwitchPhysics(false);
+                balaAuxiliar.GetComponent<item>().DestroyAfterTime();
+
                 balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce);
                 
-                picker.SubstractItem();
-
-                Destroy(balaAuxiliar, 2);
+                picker.SubstractItem();               
             }
         }
     }

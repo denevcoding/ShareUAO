@@ -13,7 +13,9 @@ public class PickerItems : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        uiPlayer.SetAtunValue(numerodeitems);
+        uiPlayer.SetLifeValue(numerodeVidas);
+        uiPlayer.SetMedallionValue(numerodeMedallones);
     }
 
     // Update is called once per frame
@@ -42,7 +44,6 @@ public class PickerItems : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-
     }
 
 
@@ -50,58 +51,41 @@ public class PickerItems : MonoBehaviour
     {
         if (collision.gameObject.tag == "item")
         {
-            Debug.Log("hemos cogido una lata de Atún COLLISION");
-            
+            Debug.Log("hemos cogido una lata de Atún COLLISION");            
             numerodeitems = numerodeitems + 1;
-
-          
-
-
+            uiPlayer.SetAtunValue(numerodeitems);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "medallon_Curry")
         {
             Debug.Log("hemos cogido una lata de Atún COLLISION");
-
             numerodeMedallones = numerodeMedallones + 1;
-
-
-
-
+            uiPlayer.SetMedallionValue(numerodeMedallones);
             Destroy(collision.gameObject);
         }
+
 
         if (collision.gameObject.tag == "enemigo")
         {
             Debug.Log("miau nos acaban de agarrar");
-
             numerodeVidas = numerodeVidas - 1;
 
-
             if (numerodeVidas == 0)
-
             {
                 SceneManager.LoadScene("GameOVer");
             }
-
-
             // Destroy(collision.gameObject);
         }
-
-
-
-
     }
+
 
     public void SubstractItem()
     {
         if (numerodeitems > 0)
         {
-
             numerodeitems = numerodeitems - 1;
             uiPlayer.SetAtunValue(numerodeitems); // Setting the ui text for atun amount
-
         }
 
       

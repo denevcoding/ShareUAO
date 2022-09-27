@@ -6,6 +6,8 @@ using TMPro;
 public class PlayerUI : MonoBehaviour
 {
     public TextMeshProUGUI atunText;
+    public TextMeshProUGUI lifeText;
+    public TextMeshProUGUI medallionText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +24,15 @@ public class PlayerUI : MonoBehaviour
     public void SetAtunValue(int value)
     {
         atunText.text = value.ToString();
+    }
+
+    public void SetLifeValue(int value)
+    {
+        lifeText.text = value.ToString();
+    }
+
+    public void SetMedallionValue(int value)
+    {
+        medallionText.text = value.ToString();
     }
 }
