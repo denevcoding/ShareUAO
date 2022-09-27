@@ -7,6 +7,8 @@ TagManager:
   - zona
   - item
   - Bala
+  - medallon_Curry
+  - enemigo
   layers:
   - Default
   - TransparentFX
