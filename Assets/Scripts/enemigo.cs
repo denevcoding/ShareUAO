@@ -35,7 +35,7 @@ public class enemigo : MonoBehaviour
     {
         enemyAnimator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        lvlManager = GameObject.FindObjectOfType<LevelManager>();
+        //lvlManager = GameObject.FindObjectOfType<LevelManager>();
     }
     // Start is called before the first frame update
     void Start()
