@@ -194,7 +194,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4348577320762582083}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.09, y: 5.23, z: -20.25}
   m_LocalScale: {x: 26.888023, y: 26.888023, z: 26.888023}
   m_ConstrainProportionsScale: 0
@@ -216,9 +216,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  isStatic: 0
   itemCollider: {fileID: 0}
   rigidBodie: {fileID: 0}
-  rotationSepeed: 0
+  timeToDestroy: 0
+  rotationSepeed: 1
 --- !u!65 &4348577320762582093
 BoxCollider:
   m_ObjectHideFlags: 0

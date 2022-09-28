@@ -19,7 +19,7 @@ public class item : MonoBehaviour
 
     [Space(20)]
     public float timeToDestroy;
-    public float rotationSepeed = 0.05f;
+    public float rotationSepeed = 5;
 
     private void Awake()
     {
