@@ -140,7 +140,7 @@ public class enemigo : MonoBehaviour
 
         }        
 
-        if (collision.collider.tag == "Bala")
+        if (collision.collider.tag == "item")
         {
             Destroy(collision.collider.gameObject);
             vida = vida - 1;
