@@ -139,6 +139,8 @@ MonoBehaviour:
   currentPoint: {fileID: 0}
   distanceToDetect: 5
   distanceToSeek: 8
+  soundManager: {fileID: 0}
+  hurtClip: {fileID: 8300000, guid: ed62749a9ff1627478962d0b1a9a17fd, type: 3}
 --- !u!195 &6675817159781316771
 NavMeshAgent:
   m_ObjectHideFlags: 0

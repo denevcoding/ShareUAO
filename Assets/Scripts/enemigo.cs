@@ -31,8 +31,15 @@ public class enemigo : MonoBehaviour
     public float distanceToSeek;
 
 
+    [Header("Sounds")]
+    public CatSoundManager soundManager;
+    public AudioClip hurtClip;
+
+
+
     private void Awake()
     {
+        soundManager = GetComponentInChildren<CatSoundManager>();
         enemyAnimator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         //lvlManager = GameObject.FindObjectOfType<LevelManager>();
@@ -142,6 +149,7 @@ public class enemigo : MonoBehaviour
 
         if (collision.collider.tag == "item")
         {
+            soundManager.PlayOneShot(hurtClip, 1f);
             Destroy(collision.collider.gameObject);
             vida = vida - 1;
             if (vida == 0)
