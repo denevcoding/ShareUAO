@@ -3,7 +3,11 @@ guid: c28288afbe526864aabe5aba306fd3f4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - catSource: {instanceID: 0}
+  - vfxSource: {instanceID: 0}
+  - step: {instanceID: 0}
+  - stepChunco: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
