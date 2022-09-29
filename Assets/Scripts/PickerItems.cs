@@ -70,6 +70,7 @@ public class PickerItems : MonoBehaviour
         {
             Debug.Log("miau nos acaban de agarrar");
             numerodeVidas = numerodeVidas - 1;
+            uiPlayer.SetLifeValue(numerodeVidas);
 
             if (numerodeVidas == 0)
             {
