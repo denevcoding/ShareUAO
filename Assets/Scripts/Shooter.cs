@@ -12,11 +12,15 @@ public class Shooter : MonoBehaviour
 
     public PickerItems picker;
 
+    public CatSoundManager soundManager;
+    public AudioClip ShootClip;
+
     // Start is called before the first frame update
     void Start()
     {
         picker = GetComponent<PickerItems>();
-       // picker = GetComponent<PickerItems>();   
+        soundManager = GetComponentInChildren<CatSoundManager>();
+        // picker = GetComponent<PickerItems>();   
     }
 
     // Update is called once per frame
@@ -37,7 +41,8 @@ public class Shooter : MonoBehaviour
                 balaAuxiliar.GetComponent<item>().DestroyAfterTime();
 
                 balaAuxiliar.GetComponent<Rigidbody>().AddForce(transform.forward * shootForce);
-                
+
+                soundManager.PlayOneShot(ShootClip, 1f);
                 picker.SubstractItem();               
             }
         }

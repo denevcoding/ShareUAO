@@ -97,7 +97,7 @@ public class CharacterConrtoller : MonoBehaviour
 
     private void Awake()
     {
-      
+        soundManager = GetComponentInChildren<CatSoundManager>();
         rbCharacter = GetComponent<Rigidbody>();
         //soundManager = GetComponent<CatSoundManager>();
 
@@ -194,6 +194,7 @@ public class CharacterConrtoller : MonoBehaviour
         
         if (inputDirection.magnitude > 0.1f) {
             inputDirection.Normalize();
+            soundManager.vfxSource.volume = 0f;
             //soundManager.CleanClip();
             //float targetAngle = Mathf.Atan2(inputDirection.x, direction.z) * Mathf.Rad2Deg + Cam.eulerAngles.y;
             //float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref t);
@@ -201,7 +202,7 @@ public class CharacterConrtoller : MonoBehaviour
         }
         else
         {
-            //soundManager.PlaySound(ronroneo);
+            soundManager.vfxSource.volume = 0.4f;
         }
 
 

@@ -54,14 +54,23 @@ public class CatSoundManager : MonoBehaviour
     {
         if (stepIndex ==0)
         {
-            catSource.PlayOneShot(step, 1);
+            catSource.PlayOneShot(step, 0.2f);
         }
         else if (stepIndex == 1)
         {
-            catSource.PlayOneShot(stepChunco, 1);
+            catSource.PlayOneShot(stepChunco, 0.08f);
         }
+    }
 
-
-       
+    public void PlayStepRunning(int stepIndex)
+    {
+        if (stepIndex == 0)
+        {
+            catSource.PlayOneShot(step, 0.5f);
+        }
+        else if (stepIndex == 1)
+        {
+            catSource.PlayOneShot(stepChunco, 0.5f);
+        }
     }
 }

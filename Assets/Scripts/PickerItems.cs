@@ -9,10 +9,17 @@ public class PickerItems : MonoBehaviour
     public int numerodeMedallones;
     public int numerodeVidas;
     public PlayerUI uiPlayer;
+    public CatSoundManager soundManager;
+
+    public AudioClip lataAtunClip;
+    public AudioClip medallonClip;
+    public AudioClip hurtClip;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GetComponentInChildren<CatSoundManager>();
+
         uiPlayer.SetAtunValue(numerodeitems);
         uiPlayer.SetLifeValue(numerodeVidas);
         uiPlayer.SetMedallionValue(numerodeMedallones);
@@ -54,6 +61,7 @@ public class PickerItems : MonoBehaviour
             Debug.Log("hemos cogido una lata de Atún COLLISION");            
             numerodeitems = numerodeitems + 1;
             uiPlayer.SetAtunValue(numerodeitems);
+            soundManager.PlayOneShot(lataAtunClip, 1f);
             Destroy(collision.gameObject);
         }
 
@@ -62,6 +70,7 @@ public class PickerItems : MonoBehaviour
             Debug.Log("hemos cogido una lata de Atún COLLISION");
             numerodeMedallones = numerodeMedallones + 1;
             uiPlayer.SetMedallionValue(numerodeMedallones);
+            soundManager.PlayOneShot(medallonClip, 1f);
             Destroy(collision.gameObject);
         }
 
@@ -71,6 +80,8 @@ public class PickerItems : MonoBehaviour
             Debug.Log("miau nos acaban de agarrar");
             numerodeVidas = numerodeVidas - 1;
             uiPlayer.SetLifeValue(numerodeVidas);
+
+            soundManager.PlayOneShot(hurtClip, 1f);
 
             if (numerodeVidas == 0)
             {
